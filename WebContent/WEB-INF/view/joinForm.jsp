@@ -43,7 +43,7 @@
 		    <label for="input2-name">이름</label>
 		    <input type="text" class="form-control" name="name" id="input2-name" value="${param.name }">    
 			<c:if test="${errors.name }">
-				<small id="emailHelp" class="form-text text-danger">이름을 입력하세요.</small>
+				<small class="form-text text-danger">이름을 입력하세요.</small>
 			</c:if>	
 		  </div>
 		  
@@ -51,7 +51,7 @@
 		    <label for="input3-pwd">암호</label>
 		    <input type="password" class="form-control" name="password" id="input3-pwd">    
 			<c:if test="${errors.password }">
-				<small id="emailHelp" class="form-text text-danger">암호를 입력하세요</small>
+				<small class="form-text text-danger">암호를 입력하세요</small>
 			</c:if>	
 		  </div>
 		  
@@ -59,10 +59,10 @@
 		    <label for="input4-confirm">확인</label>
 		    <input type="password" class="form-control" name="confirmPassword" id="input4-confirm">    
 				<c:if test="${errors.confirmPassword }">
-					<small id="emailHelp" class="form-text text-danger">확인을 입력하세요</small>
+					<small class="form-text text-danger">확인을 입력하세요</small>
 				</c:if>
 				<c:if test="${errors.notMatch }">
-					<small id="emailHelp" class="form-text text-danger">암호와 확인이 일치하지 않습니다.</small>
+					<small class="form-text text-danger">암호와 확인이 일치하지 않습니다.</small>
 				</c:if>		
 		  </div>
 		  

@@ -35,6 +35,9 @@
        <u:isLogin>
 	       <ul class="navbar-nav">
 	       	<li class="nav-item">
+	       		<a href="${pageContext.request.contextPath }/readInfo.do" class="nav-link"><i class="fas fa-info"></i>회원 정보</a>
+	       	</li>
+	       	<li class="nav-item">
 	       		<a href="${pageContext.request.contextPath }/changePwd.do" class="nav-link"><i class="fas fa-key"></i>암호 변경</a>
 	       	</li>
 	       	<li class="nav-item">

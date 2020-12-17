@@ -10,7 +10,7 @@ import register.model.Register;
 
 public class RegisterDao {
 	
-	public void selectById(Connection conn, String id) throws SQLException {
+	public Register selectById(Connection conn, String id) throws SQLException {
 		
 		Register register = null;
 		String sql = "SELECT registerid, name, password, regdate "
@@ -34,7 +34,27 @@ public class RegisterDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			JdbcUtil.close(conn);
+			JdbcUtil.close(rs, pstmt);
+		}
+		
+		return register;
+	}
+	
+	public void insert(Connection conn, Register register) throws SQLException {
+		
+		String sql = "INSERT INTO register "
+						+ "(registerid, name, password, regdate) "
+						+ "VALUES(?, ?, ?, SYSDATE)";
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, register.getId());
+			pstmt.setString(2, register.getName());
+			pstmt.setString(3, register.getPassword());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
 	}
 }

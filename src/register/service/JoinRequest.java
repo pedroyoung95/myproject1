@@ -1,5 +1,6 @@
 package register.service;
 
+import java.util.Date;
 import java.util.Map;
 
 public class JoinRequest {
@@ -45,14 +46,14 @@ public class JoinRequest {
 		
 		
 		if(!errors.containsKey("confirmPassword")) {
-			if(isPasswordEqualsConfirm()) {
+			if(!isPasswordEqualsConfirm()) {
 				errors.put("notMatch", true);
 			}
 		}		
 	}
 	
 	public boolean isPasswordEqualsConfirm() {
-		return password != null || password.equals(confirmPassword);
+		return password != null && password.equals(confirmPassword);
 	}
 	
 	public void checkEmpty(Map<String, Boolean> errors, String value, String fieldName) {
