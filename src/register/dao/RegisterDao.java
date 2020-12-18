@@ -1,6 +1,6 @@
 package register.dao;
 
-import java.sql.Connection;
+import java.sql.Connection;	
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -55,6 +55,26 @@ public class RegisterDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
+		}
+	}
+	
+	public void update(Connection con, Register register) throws SQLException {
+		String sql = "UPDATE register SET password=? WHERE registerid=?";
+		try(PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setString(1, register.getPassword());
+			pstmt.setString(2, register.getId());
+			
+			pstmt.executeUpdate();
+		}
+	}
+	
+	public void delete(Connection con, Register register) throws SQLException {
+		String sql = "DELETE register WHERE registerid=?";
+		
+		try(PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setString(1, register.getId());
+			
+			pstmt.executeUpdate();
 		}
 	}
 }

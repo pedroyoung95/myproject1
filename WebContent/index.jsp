@@ -17,36 +17,55 @@
 </head>
 <body>
 <u:navbar2></u:navbar2>
+
+
 <div class="container">
-	<div class="jumbotron">
-	  <u:isLogin>
-		  <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-			  <div class="carousel-inner">
-			    <div class="carousel-item active">
-			        <img src="..." class="d-block w-100" alt="...">
-			    </div>
-			    <div class="carousel-item">
-			      <img src="..." class="d-block w-100" alt="...">
-			    </div>
-			    <div class="carousel-item">
-			      <img src="..." class="d-block w-100" alt="...">
-			    </div>
-			  </div>
+	<u:isLogin>
+		<div class="jumbotron">		  
+		  <h1 class="display-4">${authUser.name }님, 안녕하세요!</h1>
+		  <p class="lead">재밌는 컨텐츠를 즐겨보세요!</p>
+		  <hr class="my-4">
+		  <p>회원가입이 필요하신가요?</p>
+		  <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath }/join.do" role="button">회원가입</a>
+		</div>
+		<br />
+		<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+			    <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
+			    <li data-target="#carouselExampleControls" data-slide-to="1"></li>
+			    <li data-target="#carouselExampleControls" data-slide-to="2"></li>
+		  	</ol>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="Leicester_City.jpg" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="BVB DORTMUND.jpg" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="FC BAYERN MUNCHEN.jpg" class="d-block w-100" alt="...">
+				</div>
 			</div>
-	  <h1 class="display-4">${authUser.name }님, 안녕하세요!</h1>
-	  <p class="lead">재밌는 컨텐츠를 즐겨보세요!</p>
-	  <hr class="my-4">
-	  <p>회원가입이 필요하신가요?</p>
-	  <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath }/join.do" role="button">회원가입</a>
+			<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>		
 	  </u:isLogin>
+	  
 	  <u:notLogin>
-	  <h1 class="display-4">어서오세요!</h1>	  
-	  <p class="lead">새로운 커뮤니티로 들어오세요!</p>
-	  <hr class="my-4">
-	  <p>회원가입부터 시작하세요!</p>
-	  <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath }/join.do" role="button">회원가입</a>
-	  </u:notLogin>
-	</div>
+	  	<div class="jumbotron">
+		  <h1 class="display-4">어서오세요!</h1>	  
+		  <p class="lead">새로운 커뮤니티로 들어오세요!</p>
+		  <hr class="my-4">
+		  <p>회원가입부터 시작하세요!</p>
+		  <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath }/join.do" role="button">회원가입</a>
+		</div>
+	  </u:notLogin>	
 </div>
 </body>
 </html>

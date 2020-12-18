@@ -53,5 +53,6 @@
   	<url-pattern>/article/modify.do</url-pattern>
   	<url-pattern>/article/remove.do</url-pattern>
   	<url-pattern>/reply/add.do</url-pattern>
+  	<url-pattern>/readInfo.do</url-pattern>
   </filter-mapping>
 </web-app>

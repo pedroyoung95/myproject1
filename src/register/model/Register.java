@@ -37,4 +37,8 @@ public class Register {
 	public boolean matchPassword(String pwd) {
 		return this.password.equals(pwd);
 	}
+	
+	public void changePassword(String newPwd) {
+		this.password = newPwd;
+	}
 }
