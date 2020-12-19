@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import auth.service.FindPwdService;
 import mvc.command.CommandHandler;
 
-public class FindPwdHandler implements CommandHandler{
-	
-	private static final String FORM_VIEW = "findPwdForm1";
+public class MakeNewPwdHandler implements CommandHandler{
+
+	private static final String FORM_VIEW = "findPwdForm2";
 	private FindPwdService findPwdService = new FindPwdService();
 	
 	@Override
@@ -31,24 +31,24 @@ public class FindPwdHandler implements CommandHandler{
 	}
 	
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
-		String id = trim(req.getParameter("id"));
+		String id = req.getParameter("id");
+		String password = trim(req.getParameter("password"));
 		
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);
 		
-		if(id == null || id.isEmpty()) {
-			errors.put("id", true);
+		if(password == null || password.isEmpty()) {
+			errors.put("password", true);
 		}
 		if(!errors.isEmpty()) {
 			return FORM_VIEW;
 		}
 		
 		try {
-			boolean result = findPwdService.checkId(id);
-			req.getSession().setAttribute("id", id);
-			return "findPwdForm2";
+			findPwdService.makeNewPwd(id, password);
+			return "newPwdSuccess";
 		} catch (Exception e) {
-			errors.put("idOrPwNotMatch", true);
+			e.printStackTrace();
 			return FORM_VIEW;
 		}
 	}

@@ -13,32 +13,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<title>암호 찾기</title>
+<title>새 암호 설정 완료</title>
 </head>
 <body>
 <u:navbar2></u:navbar2>
 
 <div class="container">
-	<div class="row">
-	<div class="col-3"></div>
-	
-	<div class="col-6">
-		<h1>새 암호 생성</h1>
-		<form action="makeNewPwd.do" method="post">			
-			<div class="form-group">
-				<input type="text" name="id" value="${sessionScope.id }" hidden/>
-			    <label for="input1-pwd">새 암호</label>
-			    <input type="password" class="form-control" name="password" id="input1-pwd"/>
-				<c:if test="${errors.password }">
-					<small class="form-text text-danger">암호를 입력하세요</small>
-				</c:if>
-			</div>
-			<input type="submit" class="btn btn-primary" value="암호 변경" />			
-		</form>
-	</div>
-	
-	<div class="col-3"></div>
-	</div>
+	<div class="jumbotron">		  
+		  <h1 class="display-4">암호를 변경했습니다!</h1>
+		  <p class="lead">이제부터 새로운 암호로 로그인 하세요!</p>
+		  <hr class="my-4">
+		  <p>컨텐츠를 즐기러 가볼까요?</p>
+		  <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath }/index.jsp" role="button">홈으로</a>
+		</div>
 </div>
 </body>
 </html>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="u" tagdir="/WEB-INF/tags"%>
 <% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
@@ -31,7 +32,8 @@
 				<c:if test="${errors.id }">
 					<small class="form-text text-danger">ID를 입력하세요</small>
 				</c:if>
-			</div>			
+			</div>		
+			<input type="submit" class="btn btn-primary" value="암호 변경" />	
 		</form>
 	</div>
 	
