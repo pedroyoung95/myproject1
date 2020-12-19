@@ -15,6 +15,27 @@
 <title>암호 찾기</title>
 </head>
 <body>
+<u:navbar2></u:navbar2>
 
+<div class="container">
+	<div class="row">
+	<div class="col-3"></div>
+	
+	<div class="col-6">
+		<h1>새 암호 생성</h1>
+		<form action="" method="post">			
+			<div class="form-group">
+			    <label for="input1-id">새 암호</label>
+			    <input type="password" class="form-control" name="password" id="input1-id"/>
+				<c:if test="${errors.password }">
+					<small class="form-text text-danger">암호를 입력하세요</small>
+				</c:if>
+			</div>			
+		</form>
+	</div>
+	
+	<div class="col-3"></div>
+	</div>
+</div>
 </body>
 </html>
