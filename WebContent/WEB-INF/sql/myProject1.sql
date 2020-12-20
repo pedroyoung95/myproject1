@@ -18,7 +18,7 @@ CREATE TABLE content(
     writer_id VARCHAR2(50) NOT NULL,
     writer_name VARCHAR2(50) NOT NULL,
     title VARCHAR2(255) NOT NULL,
-    content VARCHAR2(4000),
+    body VARCHAR2(4000),
     regdate DATE NOT NULL,
     moddate DATE NOT NULL,
     read_cnt NUMBER,
