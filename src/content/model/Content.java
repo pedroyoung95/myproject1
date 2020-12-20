@@ -7,17 +7,17 @@ public class Content {
 	private Integer number;
 	private Writer writer;
 	private String title;
-	private String content;
+	private String body;
 	private Date regDate;
 	private Date modifiedDate;
 	private int readCount;
 	
-	public Content(Integer number, Writer writer, String title, String content, Date regDate, Date modifiedDate, int readCount) {
+	public Content(Integer number, Writer writer, String title, String body, Date regDate, Date modifiedDate, int readCount) {
 		super();
 		this.number = number;
 		this.writer = writer;
 		this.title = title;
-		this.content = content;
+		this.body = body;
 		this.regDate = regDate;
 		this.modifiedDate = modifiedDate;
 		this.readCount = readCount;
@@ -31,8 +31,8 @@ public class Content {
 	public String getTitle() {
 		return title;
 	}
-	public String getContent() {
-		return content;
+	public String getBody() {
+		return body;
 	}
 	public Date getRegDate() {
 		return regDate;
