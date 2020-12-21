@@ -19,13 +19,28 @@
 <u:navbar2></u:navbar2>
 
 <div class="container">
-	<div class="jumbotron">		  
-		<h1 class="display-4">가입에 성공했습니다!</h1>
-		<p class="lead">다양한 컨텐츠를 누려보세요!</p>
-		<hr class="my-4">
-		<p>컨텐츠를 즐기러 가볼까요?</p>
-		<a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath }/index.jsp" role="button">홈으로</a>
-	</div>		
+	<div class="row">
+		<div class="col-3"></div>
+		
+		<div class="col-6">
+			<h1>회원 탈퇴</h1>
+			<form action="removeRegister.do" method="post">
+				<div class="form-group">
+				<label for="input1-curPwd">암호 </label>
+				<input type="password" name="password" id="" class="form-control"/>
+					<c:if test="${errors.password }">
+						<small class="form-text text-danger">암호를 입력하세요.</small>
+					</c:if>
+					<c:if test="${errors.badPwd }">
+						<small class="form-text text-danger">암호가 일치하지 않습니다.</small>
+					</c:if>
+				</div>
+				<input type="submit" class="btn btn-primary" value="탈퇴" />
+			</form>
+		</div>
+		
+		<div class="col-3"></div>
+	</div>
 </div>
 </body>
 </html>

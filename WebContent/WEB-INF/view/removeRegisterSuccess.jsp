@@ -20,12 +20,12 @@
 
 <div class="container">
 	<div class="jumbotron">		  
-		<h1 class="display-4">가입에 성공했습니다!</h1>
-		<p class="lead">다양한 컨텐츠를 누려보세요!</p>
+		<h1 class="display-4">회원 탈퇴 되었습니다.</h1>
+		<p class="lead">앞으로 더 좋은 모습으로 다시 만나요!</p>
 		<hr class="my-4">
-		<p>컨텐츠를 즐기러 가볼까요?</p>
+		<p>초기 화면으로</p>
 		<a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath }/index.jsp" role="button">홈으로</a>
-	</div>		
+	</div>
 </div>
 </body>
 </html>

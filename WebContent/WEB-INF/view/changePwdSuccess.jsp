@@ -19,13 +19,13 @@
 <u:navbar2></u:navbar2>
 
 <div class="container">
-		<div class="jumbotron">		  
-		  <h1 class="display-4">암호를 변경했습니다!</h1>
-		  <p class="lead">이제부터 새로운 암호로 로그인 하세요!</p>
-		  <hr class="my-4">
-		  <p>컨텐츠를 즐기러 가볼까요?</p>
-		  <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath }/index.jsp" role="button">홈으로</a>
-		</div>		
+	<div class="jumbotron">		  
+		<h1 class="display-4">암호를 변경했습니다!</h1>
+		<p class="lead">이제부터 새로운 암호로 로그인 하세요!</p>
+		<hr class="my-4">
+		<p>컨텐츠를 즐기러 가볼까요?</p>
+		<a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath }/index.jsp" role="button">홈으로</a>
+	</div>		
 </div>
 </body>
 </html>
