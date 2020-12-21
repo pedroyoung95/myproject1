@@ -34,7 +34,11 @@
 		</div>	
 		<div class="form-group">
 			<label for="input3-regdate">가입일</label>
-			<input type="text" class="form-control" name="name" value="${authUser.regdate }" id="input3-regdate" readonly/>				
+			<input type="text" class="form-control" name="regdate" value="${authUser.regdate }" id="input3-regdate" readonly/>				
+		</div>
+		<div class="form-group">
+			<label for="input4-wroteCnt">작성 게시글 수</label>
+			<input type="text" class="form-control" name="wroteCnt" value="${authUser.wroteCnt }" id="input4-wroteCnt" readonly/>				
 		</div>
 	</div>
 				

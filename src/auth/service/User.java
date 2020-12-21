@@ -7,7 +7,14 @@ public class User {
 	private String id;
 	private String name;
 	private Date regdate;
+	private int wroteCnt;
 	
+	public int getWroteCnt() {
+		return wroteCnt;
+	}
+	public void setWroteCnt(int wroteCnt) {
+		this.wroteCnt = wroteCnt;
+	}
 	public Date getRegdate() {
 		return regdate;
 	}

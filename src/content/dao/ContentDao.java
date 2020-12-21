@@ -133,6 +133,23 @@ public class ContentDao {
 		}
 	}
 	
+	public int wroteCnt(Connection conn, String id) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) FROM content WHERE writer_id=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
 	public void increaseReadCount(Connection conn, int no) throws SQLException {
 		String sql = "UPDATE content SET read_cnt=read_cnt+1 "
 						+ "WHERE content_no=?";

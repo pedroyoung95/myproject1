@@ -1,21 +1,21 @@
 package content.command;
 
-import java.util.HashMap;
+import java.util.HashMap;	
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import article.model.Writer;
-import article.service.WriteArticleService;
-import article.service.WriteRequest;
+import content.model.Writer;
+import content.service.WriteContentService;
+import content.service.WriteRequest;
 import auth.service.User;
 import mvc.command.CommandHandler;
 
 public class WriteContentHandler implements CommandHandler{
 	
-	private static final String FORM_VIEW = "newArticleForm";
-	private WriteArticleService writeService = new WriteArticleService();
+	private static final String FORM_VIEW = "newContentForm";
+	private WriteContentService writeService = new WriteContentService();
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -46,17 +46,17 @@ public class WriteContentHandler implements CommandHandler{
 			return FORM_VIEW;
 		}
 		
-		int newArticleNo = writeService.write(writeReq);
-		req.setAttribute("newArticleNo", newArticleNo);
+		int newContentNo = writeService.write(writeReq);
+		req.setAttribute("newContentNo", newContentNo);
 		
-		return "newArticleSuccess";
+		return "newContentSuccess";
 	}
 	
 	private WriteRequest createWriteRequest(User user, HttpServletRequest req) {
 		return new WriteRequest(
 				new Writer(user.getId(), user.getName()),
 				req.getParameter("title"),
-				req.getParameter("content")
+				req.getParameter("body")
 				);
 	}
 }

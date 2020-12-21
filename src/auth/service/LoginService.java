@@ -1,8 +1,9 @@
 package auth.service;
 
-import java.sql.Connection;
+import java.sql.Connection;	
 import java.sql.SQLException;
 
+import content.dao.ContentDao;
 import jdbc.ConnectionProvider;
 import register.dao.RegisterDao;
 import register.model.Register;
@@ -10,6 +11,7 @@ import register.model.Register;
 public class LoginService {
 	
 	private RegisterDao registerDao = new RegisterDao();
+	private ContentDao contentDao = new ContentDao();
 	
 	public User Login(String id, String password) {
 		
@@ -27,6 +29,7 @@ public class LoginService {
 			user.setId(register.getId());
 			user.setName(register.getName());
 			user.setRegdate(register.getRegdate());
+			user.setWroteCnt(contentDao.wroteCnt(conn, id));
 			return user;
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
