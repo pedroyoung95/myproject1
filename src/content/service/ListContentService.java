@@ -13,7 +13,7 @@ public class ListContentService {
 	private ContentDao contentDao = new ContentDao();
 	private int size = 10;
 	
-	public ContentPage getArticlePage(int pageNum) {
+	public ContentPage getContentPage(int pageNum) {
 		try(Connection conn = ConnectionProvider.getConnection()) {
 			int total = contentDao.selectCount(conn);
 			List<Content> content = contentDao.select(conn, pageNum, size);

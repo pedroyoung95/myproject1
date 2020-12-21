@@ -18,7 +18,15 @@
 <u:navbar2></u:navbar2>
 
 <div class="container">
-	<h1>잘못된 경로입니다.</h1>
+	<div class="jumbotron">		  
+		<h1 class="display-4">잘못된 경로입니다!</h1>
+		<p class="lead">올바른 경로로 이동하세요!</p>
+		<hr class="my-4">
+		<p>컨텐츠를 즐기러 가볼까요?</p>
+		<a class="btn btn-primary" href="${pageContext.request.contextPath }/content/list.do">게시글목록보기</a>
+		<a class="btn btn-primary" href="${pageContext.request.contextPath }/content/read.do?no=${newContentNo}">게시글내용보기</a>
+		<a class="btn btn-primary" href="${pageContext.request.contextPath }/index.jsp" role="button">홈으로</a>
+	</div>	
 </div>
 </body>
 </html>

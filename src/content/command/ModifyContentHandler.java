@@ -1,18 +1,18 @@
 package content.command;
 
-import java.io.IOException;
+import java.io.IOException;	
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import article.service.ArticleData;
-import article.service.ArticleNotFoundException;
-import article.service.ModifyArticleService;
-import article.service.ModifyRequest;
-import article.service.PermissionDeniedException;
-import article.service.ReadArticleService;
+import content.service.ContentData;
+import content.service.ContentNotFoundException;
+import content.service.ModifyContentService;
+import content.service.ModifyRequest;
+import content.service.PermissionDeniedException;
+import content.service.ReadContentService;
 import auth.service.User;
 import mvc.command.CommandHandler;
 
@@ -20,8 +20,8 @@ public class ModifyContentHandler implements CommandHandler{
 	
 	private static final String FORM_VIEW = "modifyForm";
 	
-	private ReadArticleService readService = new ReadArticleService();
-	private ModifyArticleService modifyService = new ModifyArticleService();
+	private ReadContentService readService = new ReadContentService();
+	private ModifyContentService modifyService = new ModifyContentService();
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -39,13 +39,13 @@ public class ModifyContentHandler implements CommandHandler{
 		try {
 			String noVal = req.getParameter("no");
 			int no = Integer.valueOf(noVal);
-			ContentData articleData = readService.getArticle(no, false);
+			ContentData contentData = readService.getContent(no, false);
 			User authUser = (User) req.getSession().getAttribute("authUser");
-			if(!canModify(authUser, articleData)) {
+			if(!canModify(authUser, contentData)) {
 				res.sendError(HttpServletResponse.SC_FORBIDDEN);
 				return null;
 			}
-			ModifyRequest modReq = new ModifyRequest(authUser.getId(), no, articleData.getArticle().getTitle(), articleData.getContent().getContent());
+			ModifyRequest modReq = new ModifyRequest(authUser.getId(), no, contentData.getContent().getTitle(), contentData.getContent().getBody());
 			req.setAttribute("modReq", modReq);
 			return FORM_VIEW;
 		} catch (Exception e) {
@@ -54,8 +54,8 @@ public class ModifyContentHandler implements CommandHandler{
 		}
 	}
 	
-	private boolean canModify(User authUser, ContentData articleData) {
-		String writerId = articleData.getArticle().getWriter().getId();
+	private boolean canModify(User authUser, ContentData contentData) {
+		String writerId = contentData.getContent().getWriter().getId();
 		return authUser.getId().equals(writerId);
 	}
 	
@@ -64,7 +64,7 @@ public class ModifyContentHandler implements CommandHandler{
 		String noVal = req.getParameter("no");
 		int no = Integer.parseInt(noVal);
 		
-		ModifyRequest modReq = new ModifyRequest(authUser.getId(), no, req.getParameter("title"), req.getParameter("content"));
+		ModifyRequest modReq = new ModifyRequest(authUser.getId(), no, req.getParameter("title"), req.getParameter("body"));
 		req.setAttribute("modReq", modReq);
 		
 		Map<String, Boolean> errors = new HashMap<>();
@@ -76,7 +76,7 @@ public class ModifyContentHandler implements CommandHandler{
 		try {
 			modifyService.modify(modReq);
 			return "modifySuccess";
-		} catch (ArticleNotFoundException e) {
+		} catch (ContentNotFoundException e) {
 			res.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		} catch (PermissionDeniedException e) {

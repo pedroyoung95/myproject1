@@ -18,7 +18,7 @@ public class ListContentHandler implements CommandHandler{
 		if(pageNoVal != null) {
 			pageNo = Integer.parseInt(pageNoVal);
 		}
-		ContentPage contentPage = listService.getArticlePage(pageNo);
+		ContentPage contentPage = listService.getContentPage(pageNo);
 		req.setAttribute("contentPage", contentPage);
 		return "listContent";
 	}

@@ -32,8 +32,8 @@
 					</c:if>
 				</div>
 				<div class="form-group">
-					<label for="input2-content">내용</label>					
-					<textarea name="body" id="input2-content" cols="30" rows="10" class="form-control">${param.body }</textarea>
+					<label for="input2-body">내용</label>					
+					<textarea name="body" id="input2-body" cols="30" rows="10" class="form-control">${param.body }</textarea>
 				</div>
 				<input type="submit" class="btn btn-primary" value="새 글 등록" />	
 			</form>

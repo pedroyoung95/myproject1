@@ -15,7 +15,7 @@
 <script
   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<title>Insert title here</title>
+<title>게시글 목록</title>
 <style>
 .num-col {
   width: 10%;
@@ -57,16 +57,16 @@
               </tr>
             </thead>
             <tbody>
-              <c:forEach var="article" items="${contentPage.content }">
+              <c:forEach var="content" items="${contentPage.content }">
                 <tr>
-                  <td class="text-right">${article.number }</td>
+                  <td class="text-right">${content.number }</td>
                   <td class="position-relative">
-                  <a class="stretched-link" href="${root }/article/read.do?no=${article.number }&pageNo=${articlePage.currentPage}">
-                    <c:out value="${article.title }" />
+                  <a class="stretched-link" href="${pageContext.request.contextPath }/content/read.do?no=${content.number }&pageNo=${contentPage.currentPage}">
+                    <c:out value="${content.title }" />
                   </a>
                   </td>
-                  <td class="text-right">${article.readCount }</td>
-                  <td>${article.writer.name }</td>
+                  <td class="text-right">${content.readCount }</td>
+                  <td>${content.writer.name }</td>
                 </tr>
               </c:forEach>
             </tbody>
@@ -77,16 +77,16 @@
         <div class="mt-5 pagenation-container d-flex justify-content-center">
           <nav aria-label="Page navigation example">
             <ul class="pagination">
-              <c:if test="${articlePage.startPage > 5}">
-                <li class="page-item"><a class="page-link" href="${root }/article/list.do?pageNo=${articlePage.startPage - 5 }">Previous</a></li>
+              <c:if test="${contentPage.startPage > 5}">
+                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/content/list.do?pageNo=${contentPage.startPage - 5 }">Previous</a></li>
               </c:if>
               
-              <c:forEach begin="${articlePage.startPage }" end="${articlePage.endPage }" var="pNo">
-                <li class="page-item"><a class="page-link" href="${root }/article/list.do?pageNo=${pNo}">${pNo }</a></li>
+              <c:forEach begin="${contentPage.startPage }" end="${contentPage.endPage }" var="pNo">
+                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/content/list.do?pageNo=${pNo}">${pNo }</a></li>
               
               </c:forEach>
-              <c:if test="${articlePage.endPage < articlePage.totalPages }">
-                <li class="page-item"><a class="page-link" href="${root }/article/list.do?pageNo=${articlePage.startPage + 5 }">Next</a></li>
+              <c:if test="${contentPage.endPage < contentPage.totalPages }">
+                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/content/list.do?pageNo=${articlePage.startPage + 5 }">Next</a></li>
               </c:if>
             </ul>
           </nav>

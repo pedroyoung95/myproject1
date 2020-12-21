@@ -14,7 +14,7 @@ import reply.service.ReplyService;
 
 public class ReadContentHandler implements CommandHandler{
 	
-	private ReadArticleService readService = new ReadArticleService();
+	private ReadContentService readService = new ReadContentService();
 	private ReplyService replyService = new ReplyService();
 	
 	@Override
@@ -22,13 +22,12 @@ public class ReadContentHandler implements CommandHandler{
 		String noVal = req.getParameter("no");
 		int articleNum = Integer.parseInt(noVal);
 		try {
-			ContentData articleData = readService.getArticle(articleNum, true);
+			ContentData contentData = readService.getContent(articleNum, true);
 			List<Reply> replyList = replyService.getReplyList(articleNum); 
-			req.setAttribute("articleData", articleData);
+			req.setAttribute("contentData", contentData);
 			req.setAttribute("replyList", replyList);
-			return "readArticle";
+			return "readContent";
 		} catch (ContentNotFoundException e) {
-			//req.getServletContext().log("no article", e);
 			System.out.println("게시물이 없습니다");
 			res.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
