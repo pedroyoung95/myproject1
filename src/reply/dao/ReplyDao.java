@@ -11,7 +11,32 @@ import jdbc.JdbcUtil;
 import reply.model.Reply;
 
 public class ReplyDao {
-
+	
+	public Reply selectById(Connection conn, int no) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM reply WHERE replyid";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+			Reply reply = null;
+			if(rs.next()) {
+				reply = new Reply();
+				reply.setId(rs.getInt("replyid"));
+				reply.setRegisterid(rs.getString("registerid"));
+				reply.setContentNum(rs.getInt("content_no"));
+				reply.setBody(rs.getString("body"));
+				reply.setRegDate(rs.getTimestamp("regdate"));
+				reply.setModfiedDate(rs.getTimestamp("moddate"));
+			}
+			return reply;
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+		
+	} 
+	
 	public void insert(Connection conn, String userId, int contentNo, String body) throws SQLException {		
 		String sql = "INSERT INTO reply "
 				  		+ "(registerid, content_no, body, regdate, moddate) "
@@ -64,6 +89,14 @@ public class ReplyDao {
 			return 0;
 		} finally {
 			JdbcUtil.close(pstmt);
+		}
+	}
+	
+	public void delete(Connection conn, int replyid) throws SQLException {
+		String sql = "DELETE reply WHERE replyid=?";
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setInt(1, replyid);
+			pstmt.executeUpdate();
 		}
 	}
 	
