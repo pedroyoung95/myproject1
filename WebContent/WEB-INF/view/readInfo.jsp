@@ -40,6 +40,10 @@
 			<label for="input4-wroteCnt">작성 게시글 수</label>
 			<input type="text" class="form-control" name="wroteCnt" value="${authUser.wroteCnt }" id="input4-wroteCnt" readonly/>				
 		</div>
+		<div class="form-group">
+			<label for="input5-replyCnt">작성 댓글 수</label>
+			<input type="text" class="form-control" name="replyCnt" value="${authUser.replyCnt }" id="input4-replyCnt" readonly/>				
+		</div>
 	</div>
 				
 	<div class="col-3"></div>

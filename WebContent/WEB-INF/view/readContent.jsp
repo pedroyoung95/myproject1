@@ -69,8 +69,8 @@
     댓글 폼 출력
     
     --%>
-        <u:replyForm articleNo="${contentData.content.number }" />
-
+        <u:replyForm contentNo="${contentData.content.number }" />
+		<br />
         <u:listReply />
       </div>
     </div>

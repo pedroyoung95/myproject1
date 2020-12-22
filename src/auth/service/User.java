@@ -8,7 +8,14 @@ public class User {
 	private String name;
 	private Date regdate;
 	private int wroteCnt;
+	private int replyCnt;
 	
+	public int getReplyCnt() {
+		return replyCnt;
+	}
+	public void setReplyCnt(int replyCnt) {
+		this.replyCnt = replyCnt;
+	}
 	public int getWroteCnt() {
 		return wroteCnt;
 	}

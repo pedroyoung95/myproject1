@@ -5,28 +5,35 @@ import java.util.Date;
 public class Reply {
 	
 	private int id;
-	private String memberid;
-	private int articleNum;
+	private String registerid;
+	private int contentNum;
 	private String body;
 	private Date regDate;
+	private Date modfiedDate;
 	
+	public Date getModfiedDate() {
+		return modfiedDate;
+	}
+	public void setModfiedDate(Date modfiedDate) {
+		this.modfiedDate = modfiedDate;
+	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getMemberid() {
-		return memberid;
+	public String getRegisterid() {
+		return registerid;
 	}
-	public void setMemberid(String memberid) {
-		this.memberid = memberid;
+	public void setRegisterid(String registerid) {
+		this.registerid = registerid;
 	}
-	public int getArticleNum() {
-		return articleNum;
+	public int getContentNum() {
+		return contentNum;
 	}
-	public void setArticleNum(int articleNum) {
-		this.articleNum = articleNum;
+	public void setContentNum(int contentNum) {
+		this.contentNum = contentNum;
 	}
 	public String getBody() {
 		return body;
