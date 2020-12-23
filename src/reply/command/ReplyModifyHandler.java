@@ -1,6 +1,6 @@
 package reply.command;
 
-import java.io.IOException;
+import java.io.IOException;	
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,16 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import auth.service.User;
 import reply.service.ReplyNotFoundException;
-import content.service.PermissionDeniedException;
-import content.service.ReplyModifyService;
-import mvc.command.CommandHandler;
-import reply.service.ModifyRequest;
 import reply.service.ReplyReadService;
+import content.service.PermissionDeniedException;
+import mvc.command.CommandHandler;
+import reply.model.Reply;
+import reply.service.ModifyRequest;
+import reply.service.ReplyModifyService;
 
 public class ReplyModifyHandler implements CommandHandler{
 
 	private static final String FORM_VIEW = "replyModifyForm";
 	private ReplyModifyService modifyService = new ReplyModifyService();
+	private ReplyReadService readService = new ReplyReadService();
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -33,7 +35,24 @@ public class ReplyModifyHandler implements CommandHandler{
 	}
 	
 	private String processForm(HttpServletRequest req, HttpServletResponse res) throws IOException {
-		return FORM_VIEW;
+		try {
+			User authUser = (User) req.getSession().getAttribute("authUser");
+			String noVal = req.getParameter("no");
+			int no = Integer.valueOf(noVal);
+			
+			
+			
+			ModifyRequest repModReq = new ModifyRequest();
+			repModReq.setReplyid(no);
+			repModReq.setRegisterid(authUser.getId());
+			repModReq.setBody(req.getParameter("body"));
+			
+			req.setAttribute("repModReq", repModReq);
+			return FORM_VIEW;
+		} catch (Exception e) {
+			res.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
 	}
 	
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
@@ -41,21 +60,27 @@ public class ReplyModifyHandler implements CommandHandler{
 		String noVal = req.getParameter("no");
 		int no = Integer.valueOf(noVal);
 		String contentNo = req.getParameter("contentNo");
+		Reply reply = readService.getReply(no);
 		
-		ModifyRequest modReq = new ModifyRequest();
-		modReq.setReplyid(no);
-		modReq.setRegisterid(authUser.getId());
-		modReq.setBody(req.getParameter("body"));
+		if(!authUser.getId().equals(reply.getRegisterid())) {
+			res.sendError(HttpServletResponse.SC_FORBIDDEN);
+			return null;
+		}
+		
+		ModifyRequest repModReq = new ModifyRequest();
+		repModReq.setReplyid(no);
+		repModReq.setRegisterid(authUser.getId());
+		repModReq.setBody(req.getParameter("body"));
 		
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);
-		modReq.validate(errors);
+		repModReq.validate(errors);
 		if(!errors.isEmpty()) {
 			return FORM_VIEW;
 		}
 		
 		try {
-			modifyService.Modify(modReq);
+			modifyService.Modify(repModReq);
 			//return "replyModifySuccess";
 			res.sendRedirect(req.getContextPath() + "/content/read.do?no=" + contentNo);
 			return null;

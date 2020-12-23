@@ -1,14 +1,13 @@
-package content.service;
+package reply.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import content.service.PermissionDeniedException;
 import jdbc.ConnectionProvider;
 import jdbc.JdbcUtil;
 import reply.dao.ReplyDao;
 import reply.model.Reply;
-import reply.service.ModifyRequest;
-import reply.service.ReplyNotFoundException;
 
 public class ReplyModifyService {
 
@@ -25,7 +24,7 @@ public class ReplyModifyService {
 			if(reply == null) {
 				throw new ReplyNotFoundException();
 			}
-			if(modReq.getRegisterid().equals(reply.getRegisterid())) {
+			if(!modReq.getRegisterid().equals(reply.getRegisterid())) {
 				throw new PermissionDeniedException();
 			}
 			

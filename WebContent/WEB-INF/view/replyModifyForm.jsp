@@ -27,8 +27,11 @@
             <input type="text" name="no" value="${param.no }" hidden/>
             <input type="text" name="contentNo" value="${param.contentNo }" hidden/>          
             <div class="form-group">
-              <label for="input1-newReply">새 댓글</label>
-              <input id="input1-newReply" name="body" type="text" class="form-control" value="${reply.body }"/>   
+              <label for="input1-newReply">댓글</label>
+              <input id="input1-newReply" name="body" type="text" class="form-control" value="${reply.body }"/>
+              <c:if test="${errors.body }">
+                <small class="form-text text-muted">댓글을 입력하세요.</small>
+              </c:if>   
             </div>
             <button type="submit" class="btn btn-primary">댓글 수정</button>
           </form>        
