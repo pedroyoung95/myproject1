@@ -15,7 +15,7 @@ public class ReplyDao {
 	public Reply selectById(Connection conn, int no) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM reply WHERE replyid";
+		String sql = "SELECT * FROM reply WHERE replyid=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
