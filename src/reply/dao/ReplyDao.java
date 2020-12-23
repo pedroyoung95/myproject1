@@ -100,4 +100,14 @@ public class ReplyDao {
 		}
 	}
 	
+	public int update(Connection conn, int no, String body) throws SQLException {
+		String sql = "UPDATE reply SET body=?, moddate=SYSDATE "
+						+ "WHERE replyid=?";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, body);
+			pstmt.setInt(2, no);
+			return pstmt.executeUpdate();
+		}
+	}
+	
 }

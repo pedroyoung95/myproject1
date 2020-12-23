@@ -33,6 +33,8 @@ public class ReplyRemoveService {
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);
 			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.close(conn);
 		}
 	}
 }

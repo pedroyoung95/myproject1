@@ -54,5 +54,7 @@
   	<url-pattern>/content/remove.do</url-pattern>
   	<url-pattern>/reply/add.do</url-pattern>
   	<url-pattern>/readInfo.do</url-pattern>
+  	<url-pattern>/reply/remove.do</url-pattern>
+  	<url-pattern>/reply/modify.do</url-pattern>
   </filter-mapping>
 </web-app>
