@@ -28,7 +28,7 @@
             <input type="text" name="contentNo" value="${param.contentNo }" hidden/>          
             <div class="form-group">
               <label for="input1-newReply">댓글</label>
-              <input id="input1-newReply" name="body" type="text" class="form-control" value="${reply.body }"/>
+              <input id="input1-newReply" name="body" type="text" class="form-control" value="${repModReq.body }"/>
               <c:if test="${errors.body }">
                 <small class="form-text text-muted">댓글을 입력하세요.</small>
               </c:if>   
