@@ -39,8 +39,12 @@ public class ReplyModifyHandler implements CommandHandler{
 			User authUser = (User) req.getSession().getAttribute("authUser");
 			String noVal = req.getParameter("no");
 			int no = Integer.valueOf(noVal);
+			Reply reply = readService.getReply(no);
 			
-			
+			if(!authUser.getId().equals(reply.getRegisterid())) {
+				res.sendError(HttpServletResponse.SC_FORBIDDEN);
+				return null;
+			}
 			
 			ModifyRequest repModReq = new ModifyRequest();
 			repModReq.setReplyid(no);
@@ -59,18 +63,14 @@ public class ReplyModifyHandler implements CommandHandler{
 		User authUser = (User) req.getSession().getAttribute("authUser");
 		String noVal = req.getParameter("no");
 		int no = Integer.valueOf(noVal);
-		String contentNo = req.getParameter("contentNo");
-		Reply reply = readService.getReply(no);
-		
-		if(!authUser.getId().equals(reply.getRegisterid())) {
-			res.sendError(HttpServletResponse.SC_FORBIDDEN);
-			return null;
-		}
+		String contentNo = req.getParameter("contentNo");		
 		
 		ModifyRequest repModReq = new ModifyRequest();
 		repModReq.setReplyid(no);
 		repModReq.setRegisterid(authUser.getId());
 		repModReq.setBody(req.getParameter("body"));
+		
+		req.setAttribute("repModReq", repModReq);
 		
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);
