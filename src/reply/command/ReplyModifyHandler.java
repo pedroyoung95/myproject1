@@ -49,7 +49,7 @@ public class ReplyModifyHandler implements CommandHandler{
 			ModifyRequest repModReq = new ModifyRequest();
 			repModReq.setReplyid(no);
 			repModReq.setRegisterid(authUser.getId());
-			repModReq.setBody(req.getParameter("body"));
+			repModReq.setBody(reply.getBody());
 			
 			req.setAttribute("repModReq", repModReq);
 			return FORM_VIEW;
