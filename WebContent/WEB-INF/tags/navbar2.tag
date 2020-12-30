@@ -19,6 +19,9 @@
         <li class="nav-item">
           <a class="nav-link" href="${pageContext.request.contextPath }/content/write.do"><i class="fas fa-edit"></i>글 쓰기</a>
         </li>
+         <li class="nav-item">
+          <a class="nav-link" href="${pageContext.request.contextPath }/gallery/list.do"><i class="fas fa-images"></i>갤러리</a>
+        </li>
        </ul>
        
        <u:notLogin>
