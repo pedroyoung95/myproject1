@@ -62,34 +62,94 @@ public class ContentDao {
 		return new Timestamp(date.getTime());
 	}
 	
-	public int selectCount(Connection conn) throws SQLException {
-		Statement stmt = null;
-		ResultSet rs = null;
-		String sql = "SELECT COUNT(*) FROM content";
+	public int selectCount(Connection conn, String option, String condition) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;		
 		
 		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+			if(option==null || condition.isEmpty()) {
+				String sql = "SELECT COUNT(*) FROM content";
+				pstmt = conn.prepareStatement(sql);
+			} else if(option.equals("0")) {
+				String sql = "SELECT COUNT(*) FROM content WHERE title LIKE ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "'%"+condition+"%'");
+			} else if(option.equals("1")) {
+				String sql = "SELECT COUNT(*) FROM content WHERE body LIKE ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "'%"+condition+"%'");
+			} else if(option.equals("2")) {
+				String sql = "SELECT COUNT(*) FROM content WHERE title LIKE ? OR body LIKE ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "'%"+condition+"%'");
+				pstmt.setString(2, "'%"+condition+"%'");
+			} else if(option.equals("3")) {
+				String sql = "SELECT COUNT(*) FROM content WHERE writer_name LIKE ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "'%"+condition+"%'");		
+			}
+			
+			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getInt(1);
 			}
 			return 0;
 		} finally {
-			JdbcUtil.close(stmt);
+			JdbcUtil.close(pstmt);
 		}
 	}
 	
-	public List<Content> select(Connection conn, int pageNum, int size) throws SQLException{
+	public List<Content> select(Connection conn, int pageNum, int size, String option, String condition) throws SQLException{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM( "
+
+		try {
+			if(option==null || condition.isEmpty()) {
+				String sql = "SELECT * FROM( "
 						+ "SELECT content_no, writer_id, writer_name, title, body, regdate, moddate, read_cnt, "
 						+ "ROW_NUMBER() OVER(ORDER BY content_no DESC)rn FROM content) "
 						+ "WHERE rn BETWEEN ? AND ?";
-		try {
-			pstmt = conn.prepareStatement(sql);			
-			pstmt.setInt(1, (pageNum - 1) * size + 1);
-			pstmt.setInt(2, pageNum * size);
+				pstmt = conn.prepareStatement(sql);			
+				pstmt.setInt(1, (pageNum - 1) * size + 1);
+				pstmt.setInt(2, pageNum * size);
+			} else if(option.equals("0")) {
+				String sql = "SELECT * FROM( "
+						+ "SELECT content_no, writer_id, writer_name, title, body, regdate, moddate, read_cnt, "
+						+ "ROW_NUMBER() OVER(ORDER BY content_no DESC)rn FROM content WHERE title LIKE ?) "
+						+ "WHERE rn BETWEEN ? AND ?";
+				pstmt = conn.prepareStatement(sql);		
+				pstmt.setString(1, "%"+condition+"%");
+				pstmt.setInt(2, (pageNum - 1) * size + 1);
+				pstmt.setInt(3, pageNum * size);
+			} else if(option.equals("1")) {
+				String sql = "SELECT * FROM( "
+						+ "SELECT content_no, writer_id, writer_name, title, body, regdate, moddate, read_cnt, "
+						+ "ROW_NUMBER() OVER(ORDER BY content_no DESC)rn FROM content WHERE body LIKE ?) "
+						+ "WHERE rn BETWEEN ? AND ?";
+				pstmt = conn.prepareStatement(sql);		
+				pstmt.setString(1, "%"+condition+"%");
+				pstmt.setInt(2, (pageNum - 1) * size + 1);
+				pstmt.setInt(3, pageNum * size);
+			} else if(option.equals("2")) {
+				String sql = "SELECT * FROM( "
+						+ "SELECT content_no, writer_id, writer_name, title, body, regdate, moddate, read_cnt, "
+						+ "ROW_NUMBER() OVER(ORDER BY content_no DESC)rn FROM content WHERE title LIKE ? OR body LIKE ?) "
+						+ "WHERE rn BETWEEN ? AND ?";
+				pstmt = conn.prepareStatement(sql);		
+				pstmt.setString(1, "%"+condition+"%");
+				pstmt.setString(2, "%"+condition+"%");
+				pstmt.setInt(3, (pageNum - 1) * size + 1);
+				pstmt.setInt(4, pageNum * size);
+			} else if(option.equals("3")) {
+				String sql = "SELECT * FROM( "
+						+ "SELECT content_no, writer_id, writer_name, title, body, regdate, moddate, read_cnt, "
+						+ "ROW_NUMBER() OVER(ORDER BY content_no DESC)rn FROM content WHERE writer_name LIKE ?) "
+						+ "WHERE rn BETWEEN ? AND ?";
+				pstmt = conn.prepareStatement(sql);		
+				pstmt.setString(1, "%"+condition+"%");				
+				pstmt.setInt(2, (pageNum - 1) * size + 1);
+				pstmt.setInt(3, pageNum * size);
+			}
 			
 			rs = pstmt.executeQuery();
 			

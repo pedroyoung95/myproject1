@@ -39,13 +39,25 @@
 
   <div class="container">
     <div class="row justify-content-center">
-    	<div class="col-6">
+    	<div class="d-flex col-8">
           <h1>게시글 목록</h1>
+          <form class="form-inline my-2 mx-auto my-lg-0">
+          <div class="dropdown">
+           <select name="opt" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                <option value="0">제목</option>
+                <option value="1">내용</option>
+                <option value="2">제목+내용</option>
+                <option value="3">글쓴이</option>
+            </select> &nbsp
+            </div>
+	      	<input name="condition" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+	      	<input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search"></input>
+	      </form>
       </div>
     </div>
+    
     <div class="row justify-content-center">
       <div class="col-8">
-
         <div class="list-container">
           <table class="table table-striped">
             <thead>
