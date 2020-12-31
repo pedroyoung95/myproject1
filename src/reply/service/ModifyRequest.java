@@ -29,7 +29,7 @@ public class ModifyRequest {
 	
 	public void validate(Map<String, Boolean> errors) {
 		if(body == null || body.trim().isEmpty()) {
-			errors.put("body", true);
+			errors.put("noReply", true);
 		}
 	}
 	

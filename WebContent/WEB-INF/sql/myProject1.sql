@@ -46,18 +46,33 @@ CREATE TABLE reply(
 );
 SELECT * FROM reply;
 
+-----대댓글
+--DROP TABLE subreply;
+--ROLLBACK;
+
+CREATE TABLE subreply(
+    subreply_no NUMBER GENERATED AS IDENTITY,
+    replyid NUMBER NOT NULL,
+    registerid VARCHAR2(50) NOT NULL,
+    body VARCHAR2(1000) NOT NULL,
+    regdate DATE NOT NULL,
+    moddate DATE NOT NULL,
+    PRIMARY KEY(subreply_no)
+);
+SELECT * FROM subreply;
+
 -----갤러리
 --DROP TABLE gallery;
 --ROLLBACK;
 
 CREATE TABLE gallery (
     picture_no NUMBER GENERATED AS IDENTITY,
-    picture BFILE NOT NULL,
     writer_id VARCHAR2(50) NOT NULL,
     writer_name VARCHAR2(50) NOT NULL,
     title VARCHAR2(255) NOT NULL,
+    filename VARCHAR2(255) NOT NULL,
     regdate DATE NOT NULL,
     moddate DATE NOT NULL,
-    PRIMARY KEY(replyid)
+    PRIMARY KEY(picture_no)
 );
 SELECT * FROM gallery;
