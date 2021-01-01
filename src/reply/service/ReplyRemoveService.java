@@ -17,14 +17,15 @@ public class ReplyRemoveService {
 	private RegisterDao registerDao = new RegisterDao();
 	private ReplyDao replyDao = new ReplyDao();
 	
-	public void remove(int no, User authUser, String password) {
+	public void remove(int no, User authUser) {
 		
 		Connection conn = ConnectionProvider.getConnection();
 		try {
 			conn.setAutoCommit(false);
 			Register register = registerDao.selectById(conn, authUser.getId());			
+			Reply reply = replyDao.selectById(conn, no);
 			
-			if (!register.getPassword().equals(password)) {
+			if(!register.getId().equals(reply.getRegisterid())) {
 				throw new PermissionDeniedException();
 			}
 			

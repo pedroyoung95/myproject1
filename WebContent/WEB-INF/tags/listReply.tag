@@ -18,6 +18,9 @@
 			<c:if test="${errors.noReply }">
 				<small class="form-text text-muted">댓글을 입력하세요.</small>			
 			</c:if>
+			<c:if test="${errors.noPermission }">
+				<small class="form-text text-muted">삭제 권한이 없습니다.</small>			
+			</c:if>
 			<input type="text" name="no" value="${param.no }" hidden/>  
 			<input type="text" hidden name="replyId" value="${reply.id }" />          
 			<span>${reply.registerid }</span>
