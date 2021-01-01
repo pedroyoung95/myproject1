@@ -30,6 +30,7 @@ public class SubReplyAddHandler implements CommandHandler{
 		HttpSession session = req.getSession();
 		User user = (User) session.getAttribute("authUser");		
 		int contentNo = Integer.parseInt(req.getParameter("contentNo"));
+		int replyId = Integer.parseInt(req.getParameter("replyId"));
 		String userId = user.getId();
 		String body = req.getParameter("subReplybody");
 		
@@ -41,13 +42,13 @@ public class SubReplyAddHandler implements CommandHandler{
 		if(!errors.isEmpty()) {
 			ContentData contentData = readService.getContent(contentNo, true);
 			List<Reply> replyList = replyService.getReplyList(contentNo); 
-			List<SubReply> subReplyList = subReplyService.getSubReplyList(contentNo);
+			//List<SubReply> subReplyList = subReplyService.getSubReplyList(contentNo);
 			req.setAttribute("contentData", contentData);
 			req.setAttribute("replyList", replyList);
-			req.setAttribute("subReplyList", subReplyList);
+			//req.setAttribute("subReplyList", subReplyList);
 			return "readContent";
 		} else {
-			addService.add(userId, contentNo, body);			
+			addService.add(userId, contentNo, replyId, body);			
 			res.sendRedirect(req.getContextPath() + "/content/read.do?no=" + req.getParameter("contentNo"));
 			return null;
 		}

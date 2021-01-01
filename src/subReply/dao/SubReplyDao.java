@@ -25,6 +25,7 @@ public class SubReplyDao {
 				subReply = new SubReply();
 				subReply.setNum(rs.getInt("subreply_no"));
 				subReply.setContentNum(rs.getInt(" content_no"));
+				subReply.setReplyId(rs.getInt("replyid"));
 				subReply.setRegisterid(rs.getString("registerid"));				
 				subReply.setBody(rs.getString("body"));
 				subReply.setRegDate(rs.getTimestamp("regdate"));
@@ -37,14 +38,15 @@ public class SubReplyDao {
 		
 	} 
 	
-	public void insert(Connection conn, String userId, int contentNo, String body) throws SQLException {		
+	public void insert(Connection conn, String userId, int contentNo, int replyId, String body) throws SQLException {		
 		String sql = "INSERT INTO subreply "
-				  		+ "(content_no, registerid, body, regdate, moddate) "
-				  		+ "VALUES(?, ?, ?, SYSDATE,SYSDATE)";
+				  		+ "(content_no, replyid, registerid, body, regdate, moddate) "
+				  		+ "VALUES(?, ?, ?, ?, SYSDATE,SYSDATE)";
 		try(PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setInt(1, contentNo);
-			pstmt.setString(2, userId);
-			pstmt.setString(3, body);
+			pstmt.setInt(2, replyId);
+			pstmt.setString(3, userId);
+			pstmt.setString(4, body);
 			
 			pstmt.executeUpdate();
 		}
@@ -52,7 +54,7 @@ public class SubReplyDao {
 	}
 
 	public List<SubReply> listReply(Connection conn, int contentNo) throws SQLException {
-		String sql = "SELECT subreply_no, content_no, registerid, body, regdate, moddate " 
+		String sql = "SELECT subreply_no, content_no, replyid, registerid, body, regdate, moddate " 
 						+ "FROM subreply "
 						+ "WHERE content_no=? " 
 						+ "ORDER BY subreply_no DESC";

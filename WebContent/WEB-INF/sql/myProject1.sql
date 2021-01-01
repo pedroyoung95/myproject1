@@ -47,12 +47,12 @@ CREATE TABLE reply(
 SELECT * FROM reply;
 
 -----대댓글
---DROP TABLE subreply;
+DROP TABLE subreply;
 --ROLLBACK;
 
 CREATE TABLE subreply(
     subreply_no NUMBER GENERATED AS IDENTITY,
-    replyid NUMBER NOT NULL,
+    content_no NUMBER NOT NULL,    
     registerid VARCHAR2(50) NOT NULL,
     body VARCHAR2(1000) NOT NULL,
     regdate DATE NOT NULL,

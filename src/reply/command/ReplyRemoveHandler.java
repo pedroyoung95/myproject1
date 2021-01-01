@@ -52,51 +52,7 @@ public class ReplyRemoveHandler implements CommandHandler{
 			return FORM_VIEW;
 		}
 		res.sendRedirect(req.getContextPath() + "/content/read.do?no=" + req.getParameter("contentNo"));
-		return null;
-		//return "replyRemoveSuccess";
-//		
-//		if (req.getMethod().equalsIgnoreCase("get")) {
-//			return processForm(req, res);
-//		} else if (req.getMethod().equalsIgnoreCase("post")) {
-//			return processSubmit(req, res);
-//		} else {
-//			res.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-//			return null;
-//		}
+		return null;		
 	}
-	
-//	private String processForm(HttpServletRequest req, HttpServletResponse res) {
-//		return FORM_VIEW;
-//	}
-//	
-//	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws IOException {
-//		Map<String, Boolean> errors = new HashMap<>();
-//		req.setAttribute("errors", errors);
-//		
-//		HttpSession session = req.getSession();
-//		User authUser = (User) session.getAttribute("authUser");
-//		
-//		String contentNo = req.getParameter("contentNo");
-//		int no = Integer.parseInt(req.getParameter("no"));
-//		String password = req.getParameter("password");
-//		Reply reply = readService.getReply(no);
-//		
-//		if(!authUser.getId().equals(reply.getRegisterid())) {
-//			res.sendError(HttpServletResponse.SC_FORBIDDEN);
-//			return null;
-//		}
-//		
-//		try {
-//			replyRemoveService.remove(no, authUser, password);
-//		} catch (PermissionDeniedException e) {
-//			errors.put("invalidePassword", true);
-//			return FORM_VIEW;
-//		} catch (Exception e) {
-//			throw new RuntimeException(e);
-//		}
-//		res.sendRedirect(req.getContextPath() + "/content/read.do?no=" + contentNo);
-//		return null;
-//		//return "replyRemoveSuccess";
-//	}
 }
 

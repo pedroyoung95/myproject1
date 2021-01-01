@@ -6,11 +6,18 @@ public class SubReply {
 	
 	private int num;
 	private int contentNum;		
+	private int replyId;
 	private String registerid;
 	private String body;
 	private Date regDate;
 	private Date modfiedDate;	
 	
+	public int getReplyId() {
+		return replyId;
+	}
+	public void setReplyId(int replyId) {
+		this.replyId = replyId;
+	}
 	public int getContentNum() {
 		return contentNum;
 	}
