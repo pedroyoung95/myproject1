@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ tag language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="u" tagdir="/WEB-INF/tags"%>
 
 <div>
 	<c:forEach items="${replyList }" var="reply" varStatus="status">
@@ -29,18 +30,19 @@
 		          <input type="submit" value="수정 완료" hidden id="submit${status.count }" class="btn btn-primary"/>
 		          <button type="button" id="btn${status.count }" class="btn btn-primary"><i class="fas fa-edit"></i> 수정</button>		          
         		  <a class="btn btn-danger" href="${pageContext.request.contextPath }/reply/remove.do?no=${reply.id }&contentNo=${contentData.content.number}"><i class="fas fa-trash-alt"></i> 삭제</a>
-		        </div>
-		        <div id="btn1"></div>
+		        </div>		        
 		      </c:if>
-		      </form>
-		      <%-- <c:forEach items="${subreplyList }" var="subreply">
-			      <div class="row">
-				      <div class="col-2"></div>
-				      <div class="col-10">
-				      
-				      </div>
-			      </div>
-		      </c:forEach>  --%>
+		      </form>	
+		      <div class="container">
+			  	<div class="row">
+			    	<div class="col-3"></div>
+			    	<div class="col-9">
+				    	<u:SubreplyForm replyId="${reply.id }" contentNo="${contentData.content.number }"/>
+						<br />
+			        	<u:listSubReply />
+		          </div>
+			  	</div>
+			  </div> 
 		</div>
 	</c:forEach>
 </div>

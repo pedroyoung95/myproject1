@@ -1,4 +1,4 @@
-package reply.command;
+package subReply.command;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,39 +13,44 @@ import content.service.ContentData;
 import content.service.ReadContentService;
 import mvc.command.CommandHandler;
 import reply.model.Reply;
-import reply.service.ReplyAddService;
 import reply.service.ReplyService;
+import subReply.model.SubReply;
+import subReply.service.SubReplyAddService;
+import subReply.service.SubReplyService;
 
-public class ReplyAddHandler implements CommandHandler {
-	
-	private ReplyAddService addService = new ReplyAddService();
+public class SubReplyAddHandler implements CommandHandler{
+
+	private SubReplyAddService addService = new SubReplyAddService();
 	private ReadContentService readService = new ReadContentService();
 	private ReplyService replyService = new ReplyService();
+	private SubReplyService subReplyService = new SubReplyService();
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		HttpSession session = req.getSession();
-		User user = (User) session.getAttribute("authUser");
-		int contentNo = Integer.parseInt(req.getParameter("no"));
+		User user = (User) session.getAttribute("authUser");		
+		int contentNo = Integer.parseInt(req.getParameter("contentNo"));
 		String userId = user.getId();
-		String body = req.getParameter("body");
+		String body = req.getParameter("subReplybody");
 		
 		Map<String, Boolean> errors = new HashMap<>();
 		req.setAttribute("errors", errors);
 		if(body==null||body.trim().isEmpty()) {
-			errors.put("body", true);
+			errors.put("noSubReply", true);
 		}
 		if(!errors.isEmpty()) {
 			ContentData contentData = readService.getContent(contentNo, true);
 			List<Reply> replyList = replyService.getReplyList(contentNo); 
+			List<SubReply> subReplyList = subReplyService.getSubReplyList(contentNo);
 			req.setAttribute("contentData", contentData);
 			req.setAttribute("replyList", replyList);
+			req.setAttribute("subReplyList", subReplyList);
 			return "readContent";
-		} else {		
+		} else {
 			addService.add(userId, contentNo, body);			
-			res.sendRedirect(req.getContextPath() + "/content/read.do?no=" + req.getParameter("no"));			
+			res.sendRedirect(req.getContextPath() + "/content/read.do?no=" + req.getParameter("contentNo"));
 			return null;
 		}
+		
 	}
-
 }
