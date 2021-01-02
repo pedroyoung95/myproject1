@@ -18,7 +18,6 @@
 <body>
 <u:navbar2></u:navbar2>
 
-
 <div class="container">
 	<u:isLogin>
 		<div class="jumbotron">		  
@@ -28,8 +27,7 @@
 		  <p>회원가입이 필요하신가요?</p>
 		  <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath }/join.do" role="button">회원가입</a>
 		</div>
-		<br />
-				
+		<br />			
 	  </u:isLogin>
 	  
 	  <u:notLogin>

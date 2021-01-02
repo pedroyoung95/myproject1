@@ -39,7 +39,7 @@
 			    	<div class="col-9">
 				    	<u:SubreplyForm replyId="${reply.id }" contentNo="${contentData.content.number }"/>
 						<br />
-			        	<u:listSubReply replyId="${reply.id }"/>
+			        	<u:listSubReply replyId="${reply.id }" contentNo="${contentData.content.number }"/>
 		          </div>
 			  	</div>
 			  </div> 

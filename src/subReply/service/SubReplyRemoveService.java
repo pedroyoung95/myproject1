@@ -7,31 +7,27 @@ import auth.service.User;
 import content.service.PermissionDeniedException;
 import jdbc.ConnectionProvider;
 import jdbc.JdbcUtil;
-import register.dao.RegisterDao;
-import register.model.Register;
 import subReply.dao.SubReplyDao;
 import subReply.model.SubReply;
 
 public class SubReplyRemoveService {
-
-	private RegisterDao registerDao = new RegisterDao();
+	
 	private SubReplyDao subReplyDao = new SubReplyDao();
 	
-	public void remove(int no, User authUser) {
+	public void remove(int subReplyNo, User authUser) {
 		
 		Connection conn = ConnectionProvider.getConnection();
 		
 		try {
 			conn.setAutoCommit(false);
+				
+			SubReply subReply = subReplyDao.selectById(conn, subReplyNo);
 			
-			Register register = registerDao.selectById(conn, authUser.getId());		
-			SubReply subReply = subReplyDao.selectById(conn, no);
-			
-			if(!register.getId().equals(subReply.getRegisterid())) {
+			if(!authUser.getId().equals(subReply.getRegisterid())) {
 				throw new PermissionDeniedException();
 			}
 			
-			subReplyDao.delete(conn, no);
+			subReplyDao.delete(conn, subReplyNo);
 			conn.commit();
 		} catch (SQLException e) {
 			JdbcUtil.rollback(conn);

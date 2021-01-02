@@ -12,19 +12,19 @@ import subReply.model.SubReply;
 
 public class SubReplyDao {
 	
-	public SubReply selectById(Connection conn, int no) throws SQLException {
+	public SubReply selectById(Connection conn, int subReplyNo) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM subreply WHERE subreply_no=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, no);
+			pstmt.setInt(1, subReplyNo);
 			rs = pstmt.executeQuery();
 			SubReply subReply = null;
 			if(rs.next()) {
 				subReply = new SubReply();
 				subReply.setNum(rs.getInt("subreply_no"));
-				subReply.setContentNum(rs.getInt(" content_no"));
+				subReply.setContentNum(rs.getInt("content_no"));
 				subReply.setReplyId(rs.getInt("replyid"));
 				subReply.setRegisterid(rs.getString("registerid"));				
 				subReply.setBody(rs.getString("body"));
@@ -95,10 +95,10 @@ public class SubReplyDao {
 		}
 	}
 	
-	public void delete(Connection conn, int subreply_no) throws SQLException {
+	public void delete(Connection conn, int subReplyNo) throws SQLException {
 		String sql = "DELETE subreply WHERE subreply_no=?";
 		try(PreparedStatement pstmt = conn.prepareStatement(sql);) {
-			pstmt.setInt(1, subreply_no);
+			pstmt.setInt(1, subReplyNo);
 			pstmt.executeUpdate();
 		}
 	}
