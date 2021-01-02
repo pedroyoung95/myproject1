@@ -1,10 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="u" tagdir="/WEB-INF/tags"%>
+<%@ attribute name="replyId" type="java.lang.Integer" %>
 
 <div>	
 	<c:forEach items="${subReplyList }" var="subReply" varStatus="status">
-		<c:if test="${subReply.replyId==reply.id }">
+		<c:if test="${subReply.replyId==replyId}">
 		<div>
 			<form action="${pageContext.request.contextPath }/subReply/modify.do" method="post">
 			<script>

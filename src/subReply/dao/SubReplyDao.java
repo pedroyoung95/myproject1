@@ -66,10 +66,11 @@ public class SubReplyDao {
 				SubReply r = new SubReply();
 				r.setNum(rs.getInt(1));
 				r.setContentNum(rs.getInt(2));
-				r.setRegisterid(rs.getString(3));				
-				r.setBody(rs.getString(4));
-				r.setRegDate(rs.getTimestamp(5));
-				r.setModfiedDate(rs.getTimestamp(6));
+				r.setReplyId(rs.getInt(3));
+				r.setRegisterid(rs.getString(4));				
+				r.setBody(rs.getString(5));
+				r.setRegDate(rs.getTimestamp(6));
+				r.setModfiedDate(rs.getTimestamp(7));
 				
 				sublist.add(r);
 			}

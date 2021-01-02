@@ -53,6 +53,7 @@ DROP TABLE subreply;
 CREATE TABLE subreply(
     subreply_no NUMBER GENERATED AS IDENTITY,
     content_no NUMBER NOT NULL,    
+    replyid NUMBER NOT NULL,
     registerid VARCHAR2(50) NOT NULL,
     body VARCHAR2(1000) NOT NULL,
     regdate DATE NOT NULL,

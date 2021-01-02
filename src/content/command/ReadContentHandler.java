@@ -23,11 +23,11 @@ public class ReadContentHandler implements CommandHandler{
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String noVal = req.getParameter("no");
-		int articleNum = Integer.parseInt(noVal);
+		int contentNum = Integer.parseInt(noVal);
 		try {
-			ContentData contentData = readService.getContent(articleNum, true);
-			List<Reply> replyList = replyService.getReplyList(articleNum); 
-			List<SubReply> subReplyList = subReplyService.getSubReplyList(articleNum); 
+			ContentData contentData = readService.getContent(contentNum, true);
+			List<Reply> replyList = replyService.getReplyList(contentNum); 
+			List<SubReply> subReplyList = subReplyService.getSubReplyList(contentNum); 
 			req.setAttribute("contentData", contentData);
 			req.setAttribute("replyList", replyList);
 			req.setAttribute("subReplyList", subReplyList);

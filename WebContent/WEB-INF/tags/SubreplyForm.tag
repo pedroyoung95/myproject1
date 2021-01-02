@@ -4,7 +4,8 @@
 <%@ attribute name="replyId" type="java.lang.Integer" %>
 <c:if test="${not empty sessionScope.authUser }">
 	<div>
-		<form action="${pageContext.request.contextPath }/subReply/add.do" method="post">			
+		<form action="${pageContext.request.contextPath }/subReply/add.do" method="post">
+			<input type="text" value="${replyId }" name="replyId" hidden/>			
 			<input type="text" value="${contentNo }" name="contentNo" hidden />
 			<input type="text" name="subReplybody" class="form-control"/>
 			<c:if test="${errors.noSubReply }">
