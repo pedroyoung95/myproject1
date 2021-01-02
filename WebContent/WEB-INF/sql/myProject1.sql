@@ -47,7 +47,7 @@ CREATE TABLE reply(
 SELECT * FROM reply;
 
 -----대댓글
-DROP TABLE subreply;
+--DROP TABLE subreply;
 --ROLLBACK;
 
 CREATE TABLE subreply(

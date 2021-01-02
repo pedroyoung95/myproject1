@@ -27,7 +27,7 @@
 			</c:if>
 			<input type="text" name="contentNo" value="${contentNo }" hidden/>
 			<input type="text" name="replyId" value="${replyId }" hidden/>  
-			<input type="text" hidden name="subreplyNo" value="${subReply.num }" />          
+			<input type="text" name="subreplyNo" value="${subReply.num }" hidden/>          
 			<span>${subReply.registerid }</span>
 			 <c:if test="${authUser.id == subReply.registerid}">
 		        <div class="button-container mt-3">

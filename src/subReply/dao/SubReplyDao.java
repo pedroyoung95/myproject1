@@ -103,12 +103,12 @@ public class SubReplyDao {
 		}
 	}
 	
-	public int update(Connection conn, int no, String body) throws SQLException {
+	public int update(Connection conn, int subReplyNo, String body) throws SQLException {
 		String sql = "UPDATE subreply SET body=?, moddate=SYSDATE "
 						+ "WHERE subreply_no=?";
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, body);
-			pstmt.setInt(2, no);
+			pstmt.setInt(2, subReplyNo);
 			return pstmt.executeUpdate();
 		}
 	}

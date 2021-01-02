@@ -54,7 +54,6 @@ public class ReplyModifyHandler implements CommandHandler{
 		
 		try {
 			modifyService.Modify(repModReq);
-			//return "replyModifySuccess";
 			res.sendRedirect(req.getContextPath() + "/content/read.do?no=" + noVal);
 			return null;
 		} catch (ReplyNotFoundException e) {
