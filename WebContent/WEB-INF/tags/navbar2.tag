@@ -29,6 +29,9 @@
 	       	<li class="nav-item">
 	       		<a href="${pageContext.request.contextPath }/login.do" class="nav-link"><i class="fas fa-sign-in-alt"></i>로그인</a>
 	       	</li>
+	       	<li class="nav-item">
+	       		<a href="${pageContext.request.contextPath }/findPwd.do" class="nav-link"><i class="fas fa-search"></i>암호 찾기</a>
+	       	</li>
 	       </ul>
        </u:notLogin>
        
@@ -39,7 +42,7 @@
 	       	</li>
 	       	<li class="nav-item">
 	       		<a href="${pageContext.request.contextPath }/changePwd.do" class="nav-link"><i class="fas fa-key"></i>암호 변경</a>
-	       	</li>
+	       	</li>	       	
 	       	<li class="nav-item">
 	       		<a href="${pageContext.request.contextPath }/removeRegister.do" class="nav-link"><i class="fas fa-users-slash"></i>회원 탈퇴</a>
 	       	</li>

@@ -1,6 +1,7 @@
 package register.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import jdbc.ConnectionProvider;
 import jdbc.JdbcUtil;
@@ -31,7 +32,7 @@ public class ChangePasswordService {
 			register.changePassword(newPwd);
 			registerDao.update(con, register);
 			con.commit();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			JdbcUtil.rollback(con);
 			throw new RuntimeException(e);
 		} finally {
